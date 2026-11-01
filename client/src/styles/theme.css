@@ -1,0 +1,131 @@
+/* ==========================================================
+   CinePlex theme tokens
+   Palette: midnight curtain background, marquee-red accent,
+   ticket-gold highlight — grounded in the physical cinema:
+   velvet curtains, marquee bulbs, torn ticket stubs.
+   ========================================================== */
+:root {
+  --bg: #100B16;
+  --surface: #1B1420;
+  --surface-2: #251B2C;
+  --border: #382C40;
+  --text: #F3EDE4;
+  --text-muted: #A79AB3;
+  --red: #C7303C;
+  --red-dim: #7A1F2B;
+  --gold: #E8B84A;
+  --green: #4CAF7D;
+  --radius: 10px;
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(199,48,60,0.18), transparent),
+    repeating-linear-gradient(180deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-body); cursor: pointer; }
+input, select, textarea { font-family: var(--font-body); }
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0;
+}
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* Signature motif: film-strip perforation edges, used on ticket
+   stubs and section dividers to keep the "cinema" idea concrete
+   rather than decorative-for-its-own-sake. */
+.film-strip-edge {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+.film-strip-edge::before,
+.film-strip-edge::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 14px;
+  background-image: radial-gradient(circle, var(--bg) 3px, transparent 3.5px);
+  background-size: 22px 14px;
+  background-repeat: repeat-x;
+  background-position: 10px center;
+}
+.film-strip-edge::before { top: 0; border-radius: var(--radius) var(--radius) 0 0; }
+.film-strip-edge::after { bottom: 0; border-radius: 0 0 var(--radius) var(--radius); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 11px 22px; border-radius: 6px; border: 1px solid transparent;
+  font-weight: 600; font-size: 14.5px; transition: transform .12s ease, background .15s ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: #d9414c; }
+.btn-gold { background: var(--gold); color: #26190a; }
+.btn-gold:hover { background: #f0c862; }
+.btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.btn-ghost { background: transparent; color: var(--text-muted); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-full { width: 100%; }
+
+/* Cards & surfaces */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.input {
+  width: 100%; padding: 11px 14px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+  font-size: 14.5px; outline: none;
+}
+.input:focus { border-color: var(--gold); }
+label { font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 6px; }
+.field { margin-bottom: 16px; }
+
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em;
+}
+.badge-red { background: rgba(199,48,60,0.18); color: #ff8a91; }
+.badge-gold { background: rgba(232,184,74,0.18); color: var(--gold); }
+.badge-green { background: rgba(76,175,125,0.18); color: var(--green); }
+
+.grid { display: grid; gap: 20px; }
+.grid-movies { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+.muted { color: var(--text-muted); }
+.error-text { color: #ff8a91; font-size: 13.5px; margin-top: 8px; }
+.success-text { color: var(--green); font-size: 13.5px; margin-top: 8px; }
+
+.spinner {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 3px solid var(--border); border-top-color: var(--gold);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 8px; }
+
+@media (max-width: 640px) {
+  .container { padding: 0 16px; }
+}
